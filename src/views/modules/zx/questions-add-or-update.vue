@@ -9,9 +9,6 @@
     </el-form-item>
     <el-form-item label="选项" prop="questionContent">
       <el-row style="margin-top: 5px" v-for="o in dataForm.options">
-<!--        <el-col :span="3">-->
-<!--          <label>A</label>-->
-<!--        </el-col>-->
         <el-col :span="19">
           <el-input v-model="o.optionContent" placeholder="选项"></el-input>
         </el-col>

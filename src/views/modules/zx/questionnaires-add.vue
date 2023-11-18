@@ -17,6 +17,22 @@
       <el-radio v-model="dataForm.businessType" label="3">资管</el-radio>
       <el-radio v-model="dataForm.businessType" label="4">信托</el-radio>
     </el-form-item>
+      <el-form-item label="所含题目" prop="businessType">
+        <el-input v-model="dataForm.questionnairesName" placeholder="输入题目关键字查询" style="margin-bottom: 5px"></el-input>
+        <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark"
+          style="width: 100%" @selection-change="handleSelectionChange">
+          <el-table-column type="selection" width="55">
+          </el-table-column>
+          <el-table-column label="题目内容" width="120" >
+            <el-row style="margin-top: 5px" v-for="ques in dataForm.questions">
+              <template slot-scope="scope">{{ ques.questionContent }}</template>
+            </el-row>
+          </el-table-column>
+        </el-table>
+        <div style="margin-top: 20px">
+          <el-button @click="toggleSelection()">取消选择</el-button>
+        </div>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -33,21 +49,24 @@
         dataForm: {
           id: 0,
           questionnairesName: '',
-          customerType: '',
+          customerType: [
+            1,
+            2
+          ],
           businessType: '',
           createTime: '',
           updateTime: '',
-          isDeleted: ''
+          isDeleted: '',
+          questions: [
+            {
+              id: 0,
+              questionContent: ''
+            }
+          ]
         },
         dataRule: {
           questionnairesName: [
             { required: true, message: '问卷名称不能为空', trigger: 'blur' }
-          ],
-          customerType: [
-            { required: true, message: '问卷面向的客户类型不能为空', trigger: 'blur' }
-          ],
-          businessType: [
-            { required: true, message: '问卷面向的业务类型不能为空', trigger: 'blur' }
           ]
         }
       }
@@ -74,6 +93,29 @@
               }
             })
           }
+        })
+      },
+      // 获取题目数据
+      getQuestionDataList () {
+        this.questionDataListLoading = true
+        this.$http({
+          url: this.$http.adornUrl('/zx/questions/list'),
+          method: 'get',
+          params: this.$http.adornParams({
+            'page': this.pageIndex,
+            'limit': this.pageSize,
+            'key': this.dataForm.key
+          })
+        }).then(({data}) => {
+          console.log(data)
+          if (data && data.code === 0) {
+            this.questionDataList = data.page.list
+            this.questionTotalPage = data.page.totalCount
+          } else {
+            this.questionDataList = []
+            this.questionTotalPage = 0
+          }
+          this.questionDataListLoading = false
         })
       },
       // 表单提交
@@ -109,7 +151,25 @@
             })
           }
         })
+      },
+      // 题目取消选中
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row)
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection()
+        }
+      },
+      handleSelectionChange(val) {
+        this.multipleSelection = val
       }
+    },
+    mounted () {
+    },
+    created () {
+      this.getQuestionDataList()
     }
   }
 </script>

@@ -51,18 +51,6 @@
           <el-tag v-if="scope.row.businessType === 4" size="middle" type="success">信托</el-tag>
         </template>
       </el-table-column>
-      <el-table-column
-        prop="createTime"
-        header-align="center"
-        align="center"
-        label="创建时间">
-      </el-table-column>
-      <el-table-column
-        prop="updateTime"
-        header-align="center"
-        align="center"
-        label="更新时间">
-      </el-table-column>
 
       <el-table-column
         fixed="right"
@@ -91,7 +79,7 @@
 </template>
 
 <script>
-  import AddOrUpdate from './questionnaires-add-or-update'
+  import AddOrUpdate from './questionnaires-add'
   export default {
     data () {
       return {

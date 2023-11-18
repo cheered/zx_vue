@@ -10,24 +10,15 @@
         <el-button v-if="isAuth('zx:questions:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
-    <el-table
-      :data="dataList"
-      border
-      v-loading="dataListLoading"
-      @selection-change="selectionChangeHandle"
-      style="width: 100%;">
+    <el-table :data="dataList" border v-loading="dataListLoading"
+      @selection-change="selectionChangeHandle" style="width: 100%;">
       <el-table-column
         type="selection"
         header-align="center"
         align="center"
         width="50">
       </el-table-column>
-      <el-table-column
-        prop="id"
-        header-align="center"
-        align="center"
-        label="">
-      </el-table-column>
+
       <el-table-column
         prop="questionContent"
         header-align="center"
