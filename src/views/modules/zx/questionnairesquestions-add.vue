@@ -10,12 +10,12 @@
     <el-form-item label="题目ID" prop="questionId">
       <el-input v-model="dataForm.questionId" placeholder="题目ID"></el-input>
     </el-form-item>
-    <el-form-item label="创建时间" prop="createTime">
-      <el-input v-model="dataForm.createTime" placeholder="创建时间"></el-input>
-    </el-form-item>
-    <el-form-item label="更新时间" prop="updateTime">
-      <el-input v-model="dataForm.updateTime" placeholder="更新时间"></el-input>
-    </el-form-item>
+<!--    <el-form-item label="创建时间" prop="createTime">-->
+<!--      <el-input v-model="dataForm.createTime" placeholder="创建时间"></el-input>-->
+<!--    </el-form-item>-->
+<!--    <el-form-item label="更新时间" prop="updateTime">-->
+<!--      <el-input v-model="dataForm.updateTime" placeholder="更新时间"></el-input>-->
+<!--    </el-form-item>-->
     <el-form-item label="逻辑删除标志" prop="isDeleted">
       <el-input v-model="dataForm.isDeleted" placeholder="逻辑删除标志"></el-input>
     </el-form-item>

@@ -2,7 +2,7 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+        <el-input v-model="dataForm.questionContentKey" placeholder="题目名称" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -31,18 +31,18 @@
 <!--        align="center"-->
 <!--        label="题目所属问卷">-->
 <!--      </el-table-column>-->
-      <el-table-column
-        prop="createTime"
-        header-align="center"
-        align="center"
-        label="创建时间">
-      </el-table-column>
-      <el-table-column
-        prop="updateTime"
-        header-align="center"
-        align="center"
-        label="更新时间">
-      </el-table-column>
+<!--      <el-table-column-->
+<!--        prop="createTime"-->
+<!--        header-align="center"-->
+<!--        align="center"-->
+<!--        label="创建时间">-->
+<!--      </el-table-column>-->
+<!--      <el-table-column-->
+<!--        prop="updateTime"-->
+<!--        header-align="center"-->
+<!--        align="center"-->
+<!--        label="更新时间">-->
+<!--      </el-table-column>-->
       <el-table-column
         fixed="right"
         header-align="center"
@@ -75,7 +75,7 @@
     data () {
       return {
         dataForm: {
-          key: ''
+          questionContentKey: ''
         },
         dataList: [],
         pageIndex: 1,
@@ -100,9 +100,10 @@
           url: this.$http.adornUrl('/zx/questions/list'),
           method: 'get',
           params: this.$http.adornParams({
+            // 传入第几页和每页的数量
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'key': this.dataForm.key
+            'questionContentKey': this.dataForm.questionContentKey
           })
         }).then(({data}) => {
           if (data && data.code === 0) {

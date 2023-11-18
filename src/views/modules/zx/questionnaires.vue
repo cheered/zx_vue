@@ -35,7 +35,7 @@
         align="center"
         label="客户类型">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.customerType === 1" size="middle" >个人</el-tag>
+          <el-tag v-if="scope.row.customerType === 0" size="middle" >个人</el-tag>
           <el-tag v-else size="middle">公司</el-tag>
         </template>
       </el-table-column>
@@ -45,10 +45,10 @@
         align="center"
         label="业务类型">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.businessType === 1" size="middle" type="success">理财</el-tag>
-          <el-tag v-if="scope.row.businessType === 2" size="middle" type="success">基金</el-tag>
-          <el-tag v-if="scope.row.businessType === 3" size="middle" type="success">资管</el-tag>
-          <el-tag v-if="scope.row.businessType === 4" size="middle" type="success">信托</el-tag>
+          <el-tag v-if="scope.row.businessType === 0" size="middle" type="success">理财</el-tag>
+          <el-tag v-if="scope.row.businessType === 1" size="middle" type="success">基金</el-tag>
+          <el-tag v-if="scope.row.businessType === 2" size="middle" type="success">资管</el-tag>
+          <el-tag v-if="scope.row.businessType === 3" size="middle" type="success">信托</el-tag>
         </template>
       </el-table-column>
 
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-  import AddOrUpdate from './questionnaires-add'
+  import AddOrUpdate from './questionnaires-add-or-update'
   export default {
     data () {
       return {
